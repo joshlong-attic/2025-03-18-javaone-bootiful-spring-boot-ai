@@ -17,6 +17,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.jdbc.core.dialect.JdbcPostgresDialect;
 import org.springframework.data.repository.ListCrudRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
@@ -35,6 +36,11 @@ public class AssistantApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(AssistantApplication.class, args);
+    }
+
+    @Bean
+    JdbcPostgresDialect jdbcPostgresDialect() {
+        return JdbcPostgresDialect.INSTANCE;
     }
 
     @Bean
@@ -82,7 +88,7 @@ class AssistantController {
             QuestionAnswerAdvisor questionAnswerAdvisor,
             PromptChatMemoryAdvisor promptChatMemoryAdvisor,
             ChatClient.Builder ai
-            ) {
+    ) {
 
         if (false) {
             repository.findAll().forEach(dog -> {
